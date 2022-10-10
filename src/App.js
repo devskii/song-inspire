@@ -40,7 +40,7 @@ function App() {
   };
 
   const getRandomKey = () => {
-    const isMinor = getRandomIntBetween(0, 1) == 0;
+    const isMinor = getRandomIntBetween(0, 1) === 0;
     const index = getRandomIntBetween(0, 11);
     return isMinor ? KEYS[index].minor : KEYS[index].major;
   };
