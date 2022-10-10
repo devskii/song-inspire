@@ -1,4 +1,11 @@
+import { useState } from "react";
+
 function App() {
+  const [randomizeTempo, setRandomizeTempo] = useState(false);
+  const [randomizeKey, setRandomizeKey] = useState(false);
+
+  const areAnyCheckboxesSelected = randomizeKey || randomizeTempo;
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl">Welcome to SongInspire</h1>
@@ -29,14 +36,30 @@ function App() {
       <div>
         <div>
           <label for="tempo">Tempo</label>
-          <input id="tempo" type="checkbox" />
+          <input
+            id="tempo"
+            type="checkbox"
+            onClick={() => setRandomizeTempo(!randomizeTempo)}
+          />
           <label for="key">Key</label>
-          <input id="key" type="checkbox" />
+          <input
+            id="key"
+            type="checkbox"
+            onClick={() => setRandomizeKey(!randomizeKey)}
+          />
         </div>
-        <button className="text-3xl shadow-lg rounded bg-slate-500 hover:bg-slate-400 p-3">
+        <button
+          disabled={!areAnyCheckboxesSelected}
+          className="text-3xl shadow-lg rounded bg-purple-700 text-white enabled:hover:bg-purple-500 p-3 disabled:bg-slate-400"
+        >
           Inspire Me
         </button>
       </div>
+      {!areAnyCheckboxesSelected && (
+        <p className="text-sm text-red-700">
+          Please select at least one constraint to continue!
+        </p>
+      )}
       {/* Consider adding legal disclaimer (fine print at the bottom) that we don't own any rights to the songs created */}
     </div>
   );
